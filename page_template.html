@@ -201,9 +201,15 @@ const ov = document.getElementById("overview-media");
 // media file names: light = name.ext, dark = name_dark.ext
 let MODE = "light";
 const med = (name, kind) => `media/${name}${MODE === "dark" ? "_dark" : ""}${kind}`;
-ov.innerHTML = `<video controls muted loop playsinline preload="metadata" aria-label="Weekly time-lapse of buildings in OSM across the study area"></video>`;
+ov.innerHTML = `<video controls muted loop playsinline preload="auto" aria-label="Weekly time-lapse of buildings in OSM across the study area"></video>`;
 const ovVideo = ov.querySelector("video");
-function setOverview() { ovVideo.poster = med("overview", "_last.jpg"); ovVideo.src = med("overview", ".mp4"); }
+// only the overview autoplays (muted, looping); skipped when the viewer asks for reduced motion
+const ovAutoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ovVideo.muted = true;
+function setOverview() {
+  ovVideo.poster = med("overview", "_last.jpg"); ovVideo.src = med("overview", ".mp4");
+  if (ovAutoplay) { ovVideo.autoplay = true; ovVideo.play().catch(() => {}); }
+}
 
 // ---------- charts
 function chart(z) {
