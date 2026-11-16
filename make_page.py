@@ -64,6 +64,8 @@ def main():
     data = dict(summary=summ, cases=cases, latest_sitrep=latest_sr, latest_sitrep_url=latest_url, meta=meta)
     tpl = Path(__file__).with_name("page_template.html").read_text(encoding="utf-8")
     html = tpl.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
+    if site.name == "docs":  # GitHub Pages copy is served as-is: add a doctype so it renders in standards mode
+        html = '<!doctype html>\n<html lang="en">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' + html
     (site / "index.html").write_text(html, encoding="utf-8")
     print("wrote", site / "index.html", f"({len(html)/1e3:.0f} kB)")
 
