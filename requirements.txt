@@ -1,0 +1,10 @@
+numpy
+pandas
+pyarrow
+geopandas>=1.0
+shapely>=2.0
+matplotlib
+imageio
+imageio-ffmpeg
+httpx
+pillow

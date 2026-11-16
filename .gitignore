@@ -1,0 +1,17 @@
+# Large or regenerable data
+out/
+out_test/
+site/
+data/dl_insp/
+data/dl_umap/
+data/basemap/
+data/ituri_zs_grid3.geojson
+data/fonts/Roboto-VF.ttf
+*.log
+__pycache__/
+*.pyc
+
+# Local tooling / secrets (the ohsome API key lives outside this folder; never commit it)
+.claude/
+*api key*.txt
+.env
