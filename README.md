@@ -1,7 +1,7 @@
 # Ituri Mapping Time-Lapse
 
 Weekly time-lapses of OpenStreetMap building footprints in the health zones of Ituri, DRC, affected by the 2026
-Ebola (Bundibugyo virus) outbreak. Runs 1 April to 15 November 2026, alongside confirmed cases and deaths by health
+Ebola (Bundibugyo virus) outbreak. Runs 1 April to 21 November 2026, alongside confirmed cases and deaths by health
 zone.
 
 **Live page:** https://aschroedercr.github.io/ituri-osm-timelapse/
@@ -9,7 +9,7 @@ zone.
 The page is served from `docs/` and includes a light/dark toggle.
 
 ## What it shows
-- An overview map of 25 health zones overlapping HOT's ~22,750 km² `#eboladrc2026` priority area. Grey shows buildings
+- An overview map of 26 health zones overlapping HOT's ~22,750 km² `#eboladrc2026` priority area. Grey shows buildings
   mapped before 1 April; orange shows buildings added since.
 - Zoomed 5.5 km views of the seven zones with the most additions, drawn as real footprints week by week on a current
   OSM basemap.
@@ -23,6 +23,8 @@ priorities, not transmission. Validators also delete and re-trace footprints, so
 | Step | Script |
 |---|---|
 | Fetch OSM history per tile (ohsome API v2, needs `OHSOME_API_KEY`) | `ebola_osm_timelapse.py fetch` |
+| Extend the cached history to a later date (one request per tile) | `update_increment.py` |
+| Refresh case data from INSP SitReps | `insp_list.py`, `insp_parse.py` |
 | Check rebuilt counts against `/stats/features/count` | `ebola_osm_timelapse.py validate`, `validate_tiles.py` |
 | Rebuild snapshots and write per-zone CSVs | `ebola_osm_timelapse.py build` |
 | Light and dark footprint and overview time-lapses (Overpass basemap, Roboto) | `zone_timelapses.py` |
